@@ -1,0 +1,178 @@
+[
+  {
+    "alert_id": "ce01",
+    "observed_ms": 1900007001000,
+    "severity": "critical",
+    "asset_group": "iam",
+    "signature": "root credential use",
+    "muted": false
+  },
+  {
+    "alert_id": "ce02",
+    "observed_ms": 1900007001800,
+    "severity": "medium",
+    "asset_group": "s3",
+    "signature": "routine api call",
+    "muted": false
+  },
+  {
+    "alert_id": "ce02",
+    "observed_ms": 1900007002200,
+    "severity": "HIGH",
+    "asset_group": "s3",
+    "signature": "port scan spike (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "ce03",
+    "observed_ms": 1900007002500,
+    "severity": "low",
+    "asset_group": "iam",
+    "signature": "heartbeat recovered (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "ce04",
+    "observed_ms": 1900007003000,
+    "severity": "medium",
+    "asset_group": "s3",
+    "signature": "agent late checkin (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "ce05",
+    "observed_ms": 1900007003400,
+    "severity": "medium",
+    "asset_group": "dmz",
+    "signature": "manual analyst note (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "ce06",
+    "observed_ms": 1900007004500,
+    "severity": "high",
+    "asset_group": "iam",
+    "signature": "suspicious sudo chain (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "ce07",
+    "observed_ms": 1900007005000,
+    "severity": "Critical",
+    "asset_group": "dmz",
+    "signature": "gateway rollback (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "ce08",
+    "observed_ms": 1900007005400,
+    "severity": "HIGH",
+    "asset_group": "s3",
+    "signature": "temporary burst (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "ce08",
+    "observed_ms": 1900007005600,
+    "severity": "medium",
+    "asset_group": "s3",
+    "signature": "recovered after replay (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "ce09",
+    "observed_ms": 1900007006200,
+    "severity": "high",
+    "asset_group": "dmz",
+    "signature": "duplicate token replay (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "ce10",
+    "observed_ms": 1900007006800,
+    "severity": "critical",
+    "asset_group": "iam",
+    "signature": "stale privilege map (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "ce10",
+    "observed_ms": 1900007007000,
+    "severity": "critical",
+    "asset_group": "iam",
+    "signature": "stale privilege map replay (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "ce11",
+    "observed_ms": 1900007007300,
+    "severity": "low",
+    "asset_group": "iam",
+    "signature": "diagnostic trace (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "ce12",
+    "observed_ms": 1900007007800,
+    "severity": "critical",
+    "asset_group": "s3",
+    "signature": "waived threat rehearsal (audit)",
+    "muted": true
+  },
+  {
+    "alert_id": "ce13",
+    "observed_ms": 1900007008600,
+    "severity": "high",
+    "asset_group": "dmz",
+    "signature": "risky payload ratio (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "ce14",
+    "observed_ms": 1900007008800,
+    "severity": "medium",
+    "asset_group": "s3",
+    "signature": "batch complete (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "ce15",
+    "observed_ms": 1900007009000,
+    "severity": "critical",
+    "asset_group": "dmz",
+    "signature": "terminal rollback (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "ce16",
+    "observed_ms": 1900007009100,
+    "severity": "high",
+    "asset_group": "dmz",
+    "signature": "zzz candidate (audit)",
+    "muted": "yes"
+  },
+  {
+    "alert_id": "ce16",
+    "observed_ms": 1900007009100,
+    "severity": "high",
+    "asset_group": "dmz",
+    "signature": "aaa candidate (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "ce17",
+    "observed_ms": 1900007009200,
+    "severity": "high",
+    "asset_group": "iam",
+    "signature": "alpha signature (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "ce17",
+    "observed_ms": 1900007009200,
+    "severity": "high",
+    "asset_group": "iam",
+    "signature": "zeta signature (audit)",
+    "muted": false
+  }
+]

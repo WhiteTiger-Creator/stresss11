@@ -1,0 +1,42 @@
+[
+  {
+    "alert_id": "b1",
+    "observed_ms": 7000050,
+    "severity": "low",
+    "asset_group": "sandbox",
+    "signature": "ok (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "b2",
+    "observed_ms": 7000100,
+    "severity": "high",
+    "asset_group": "sandbox",
+    "signature": "slow burst (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "b2",
+    "observed_ms": 7000120,
+    "severity": "HIGH",
+    "asset_group": "sandbox",
+    "signature": "slow burst duplicate (audit)",
+    "muted": false
+  },
+  {
+    "alert_id": "b3",
+    "observed_ms": 7000200,
+    "severity": "critical",
+    "asset_group": "sandbox",
+    "signature": "muted critical (audit)",
+    "muted": true
+  },
+  {
+    "alert_id": "b4",
+    "observed_ms": " 150 ",
+    "severity": "Critical",
+    "asset_group": "sandbox",
+    "signature": "escalate (audit)",
+    "muted": false
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "asset_group": "iam",
+    "severity_scope": "high",
+    "start_ms": 1900007009000,
+    "end_ms": 1900007009250
+  },
+  {
+    "asset_group": " core ",
+    "severity_scope": "high",
+    "start_ms": 1900007009180,
+    "end_ms": 1900007009300
+  },
+  {
+    "asset_group": "dmz",
+    "severity_scope": "all",
+    "start_ms": 1900007006100,
+    "end_ms": 1900007006350
+  },
+  {
+    "asset_group": "dmz",
+    "severity_scope": "high",
+    "start_ms": 1900007009000,
+    "end_ms": 1900007009100
+  },
+  {
+    "asset_group": "dmz",
+    "severity_scope": "critical",
+    "start_ms": 1900007008800,
+    "end_ms": 1900007009050
+  },
+  {
+    "asset_group": "dmz",
+    "severity_scope": "critical",
+    "start_ms": 1900007009020,
+    "end_ms": 1900007009100
+  },
+  {
+    "asset_group": "sandbox",
+    "severity_scope": "high",
+    "start_ms": 7000110,
+    "end_ms": 7000130
+  },
+  {
+    "asset_group": "s3",
+    "severity_scope": "debug",
+    "start_ms": 7000000,
+    "end_ms": 7000001
+  },
+  {
+    "asset_group": "iam",
+    "severity_scope": "all",
+    "start_ms": "oops",
+    "end_ms": "oops2"
+  }
+]
