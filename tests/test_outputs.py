@@ -427,6 +427,46 @@ def _compute_summary(events: list[dict], override_rows: list[dict] | None = None
         "anomaly_digest_checksum": hashlib.sha256(
             "|".join(row["anomaly_digest"] for row in anomalies).encode("utf-8")
         ).hexdigest(),
+        **_escalation_ledger(anomalies),
+    }
+
+
+def _escalation_ledger(anomalies: list[dict]) -> dict:
+    """Sequential escalation-pressure ledger per #CloudAudit-5122/5123.
+
+    Carry propagates between consecutive rows in export order; the carry credit
+    is ceilinged while the gap decay and chain-size debit are floored.
+    """
+    previous_observed_ms = None
+    previous_carry_out = 0
+    critical_ids: list[str] = []
+    max_pressure = 0
+    rows: list[str] = []
+    for anomaly in anomalies:
+        gap_ms = (
+            0
+            if previous_observed_ms is None
+            else max(previous_observed_ms - anomaly["observed_ms"], 0)
+        )
+        carry_in = max(previous_carry_out - (gap_ms // 150), 0)
+        pressure = anomaly["chain_risk_score"] + (-(-carry_in // 3))
+        carry_out = min(
+            carry_in + anomaly["chain_risk_score"] - (anomaly["chain_size"] // 2), 90
+        )
+        flag = 1 if pressure >= 10 else 0
+        if flag:
+            critical_ids.append(str(anomaly["alert_id"]))
+        max_pressure = max(max_pressure, pressure)
+        rows.append(f"{anomaly['alert_id']}|{pressure}|{flag}|{carry_out}")
+        previous_observed_ms = anomaly["observed_ms"]
+        previous_carry_out = carry_out
+    return {
+        "critical_escalation_ids": sorted(critical_ids),
+        "critical_escalation_count": len(critical_ids),
+        "max_escalation_pressure": max_pressure,
+        "escalation_ledger_checksum": hashlib.sha256(
+            "\n".join(rows).encode("utf-8")
+        ).hexdigest(),
     }
 
 
@@ -688,6 +728,10 @@ def test_verified_summary_matches_independent_computation(diagnosis: dict, expec
         "max_chain_reach_score",
         "chain_reach_digest_checksum",
         "anomaly_digest_checksum",
+        "critical_escalation_ids",
+        "critical_escalation_count",
+        "max_escalation_pressure",
+        "escalation_ledger_checksum",
     ):
         assert verified[key] == expected[key]
     assert list(verified["severity_counts"].keys()) == list(SEVERITY_ORDER)
@@ -1339,3 +1383,22 @@ def test_chain_reach_propagates_over_strongest_directed_path(tmp_path_factory):
         assert summary["max_chain_reach_score"] == 28
     finally:
         OVERRIDES_PATH.write_text(original_overrides)
+
+
+def test_escalation_ledger_credit_is_ceilinged(summary: dict):
+    """The escalation carry credit rounds UP; a floored credit yields a different ledger."""
+    anomalies = _compute_flagged(_load_events(INPUT_PATH))
+    assert summary["escalation_ledger_checksum"] == _escalation_ledger(anomalies)[
+        "escalation_ledger_checksum"
+    ]
+    # Recompute with a floored credit -- the shipped data is tuned so they differ.
+    prev_ms, prev_out, rows = None, 0, []
+    for anomaly in anomalies:
+        gap = 0 if prev_ms is None else max(prev_ms - anomaly["observed_ms"], 0)
+        carry_in = max(prev_out - (gap // 150), 0)
+        pressure = anomaly["chain_risk_score"] + (carry_in // 3)
+        carry_out = min(carry_in + anomaly["chain_risk_score"] - (anomaly["chain_size"] // 2), 90)
+        rows.append(f"{anomaly['alert_id']}|{pressure}|{1 if pressure >= 10 else 0}|{carry_out}")
+        prev_ms, prev_out = anomaly["observed_ms"], carry_out
+    floored = hashlib.sha256("\n".join(rows).encode("utf-8")).hexdigest()
+    assert summary["escalation_ledger_checksum"] != floored

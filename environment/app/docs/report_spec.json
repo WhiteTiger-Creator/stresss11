@@ -256,7 +256,11 @@
         "chain_digest_checksum",
         "max_chain_reach_score",
         "chain_reach_digest_checksum",
-        "anomaly_digest_checksum"
+        "anomaly_digest_checksum",
+        "critical_escalation_ids",
+        "critical_escalation_count",
+        "max_escalation_pressure",
+        "escalation_ledger_checksum"
       ]
     },
     "output_paths": {
@@ -457,10 +461,19 @@
     "chain_digest": "first 12 lowercase SHA256 hex chars of chain_id|chain_size|chain_span_ms|chain_risk_score|comma_joined_chain_alert_ids",
     "chain_id": "first 10 lowercase SHA1 hex chars of comma_joined_chain_alert_ids",
     "chain_reach_digest": "first 12 lowercase SHA256 hex chars of chain_id|chain_reach_score|chain_reach_depth|comma_joined_chain_reach_path",
-    "anomaly_digest": "the only authoritative definition: first 12 lowercase SHA1 hex chars of alert_id|observed_ms|severity|asset_group|signature|override_pressure_score|chain_id|chain_size|chain_span_ms|chain_risk_score|chain_digest|chain_reach_score|chain_reach_depth|comma_joined_chain_reach_path|chain_reach_digest"
+    "anomaly_digest": "the only authoritative definition: first 12 lowercase SHA1 hex chars of alert_id|observed_ms|severity|asset_group|signature|override_pressure_score|chain_id|chain_size|chain_span_ms|chain_risk_score|chain_digest|chain_reach_score|chain_reach_depth|comma_joined_chain_reach_path|chain_reach_digest",
+    "escalation_ledger_checksum": "SHA-256 over one line per anomaly row in flagged.jsonl export order, `alert_id|escalation_pressure|c|carry_out` with c=1 for an escalation-critical row else 0, joined by a single newline, no trailing newline, hashed over UTF-8. The values themselves are governed by the dossier."
   },
   "semantics_source": {
     "notes": "This document is the output contract only: CLI shapes, report schemas, exact key sets, checksum serialization and digest payload encodings. It does NOT define how values are derived.",
     "authority": "Normalization, dedupe tie-breaks, override windows/matching/pressure, chain correlation and the directed reach propagation were settled during the CloudAudit review; the authoritative record is the #CloudAudit-ticketed decision notes inside /app/incident/export_dossier.md. Where an early triage proposal conflicts with a later decision, the later decision wins."
+  },
+  "field_types": {
+    "critical_escalation_ids": {
+      "type": "array",
+      "items": "string",
+      "order": "sorted lexicographically ascending",
+      "note": "alert_id values as strings, sorted -- not in export order."
+    }
   }
 }

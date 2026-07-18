@@ -36,7 +36,7 @@ Related alerts form transitive chains. Chains then participate in a directed rea
 
 ## Repair audit and artifacts
 
-Every repair reads the pre-repair SHA-256 from the frozen bytes before replacing the active workflow. `repair_audit.json` contains `patched_workflow`, `processing_steps`, `removed_tokens`, `pre_repair`, and `post_repair`. Copy `processing_steps` from the JSON specification without paraphrasing it.
+Every repair reads the pre-repair SHA-256 from the frozen bytes before replacing the active workflow. `repair_audit.json` contains `patched_workflow`, `processing_steps`, `removed_tokens`, `pre_repair`, and `post_repair`. The **value** of `processing_steps` must be the array at `repair_audit.processing_steps` in `/app/docs/report_spec.json`, copied element for element in the same order. It is compared for exact equality, so composing your own step names, renaming a step to read more naturally, reordering them, or correcting what looks like a misspelling in a step name all fail the check — reproduce each string exactly as the spec writes it. Extract the array programmatically rather than retyping it.
 
 `removed_tokens` maps each forbidden token string to a boolean. The removed-token map uses the exact source literals `event["observed_at"]` and `severity == "critical"`. The post-repair section records integer `escalated_count` and `rerun_escalated_count`.
 
