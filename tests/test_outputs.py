@@ -923,6 +923,24 @@ def test_cli_diagnose_subcommand(expected: dict, dossier_text: str):
         assert quote in dossier_text
 
 
+def test_diagnose_rejects_stray_input_flag(tmp_path_factory):
+    """diagnose is stateless: it accepts only --dossier/--report and rejects a stray --input."""
+    report = tmp_path_factory.mktemp("diag_reject") / "diagnosis.json"
+    result = subprocess.run(
+        [
+            "python3", str(CLI), "diagnose",
+            "--dossier", str(DOSSIER_PATH),
+            "--report", str(report),
+            "--input", str(DOSSIER_PATH),
+        ],
+        capture_output=True,
+        text=True,
+        timeout=60,
+    )
+    assert result.returncode != 0, "diagnose must reject a stray --input flag"
+    assert not report.exists(), "diagnose must not write a report when given an unknown flag"
+
+
 def test_repair_repatches_reset_workflow_with_custom_output_dir(
     tmp_path_factory, expected: dict
 ):
