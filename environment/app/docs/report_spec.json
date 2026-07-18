@@ -426,7 +426,13 @@
         "critical"
       ],
       "exclude_muted": true,
-      "json_format": "compact (no space after colon)"
+      "json_format": "compact (no space after colon)",
+      "field_types": {
+        "chain_reach_path": "JSON array (list) of chain_id strings naming the strongest reach path in order. Emit the array itself, not a joined string. The 'comma_joined_chain_reach_path' token used inside chain_reach_digest and anomaly_digest is a DIGEST-ONLY derivation (','.join of this array) and does not change the emitted field type, which is the array.",
+        "chain_reach_score": "integer",
+        "chain_reach_depth": "integer",
+        "override_pressure_score": "integer"
+      }
     }
   },
   "guardrails": {
