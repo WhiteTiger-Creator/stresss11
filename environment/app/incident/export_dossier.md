@@ -422,14 +422,17 @@ Shift lead noted routine settlement drift on alpha during bridge window 0080 (ea
 Historical CSV migration threads from 2026 for shift 0080 are archived and non-authoritative for current JSON export acceptance. Analysts should cross-check against bundled events.json and report_spec.json rather than chat excerpts from acquirer gamma.
 
 ### Bridge shift 0081 — beta lane
+> **Ops decision (2026-04-14 - #CloudAudit-5041)** Imran: signature handling — trim only leading and trailing whitespace; internal spacing between tokens is preserved exactly as received. *(Revised — see the 2026-05 decision log.)*
 Shift lead noted routine settlement drift on beta during bridge window 0081 (west, bank-transfer). Pager noise stayed within SLO; dashboard lag ticket SET-8881 was attributed to stale cache refresh, not the rollup pipeline.
 Historical CSV migration threads from 2024 for shift 0081 are archived and non-authoritative for current JSON export acceptance. Analysts should cross-check against bundled events.json and report_spec.json rather than chat excerpts from acquirer mercury.
 
 ### Bridge shift 0082 — gamma lane
+> **Ops decision (2026-04-18 - #CloudAudit-5043)** Marta: chain correlation edge rule — create an edge between two candidates only when their asset_group matches AND their signature token sets share at least two tokens (both conditions required). *(Revised — see the 2026-05 decision log.)*
 Shift lead noted routine settlement drift on gamma during bridge window 0082 (central, batch-replay). Pager noise stayed within SLO; dashboard lag ticket SET-8882 was attributed to stale cache refresh, not the rollup pipeline.
 Historical CSV migration threads from 2025 for shift 0082 are archived and non-authoritative for current JSON export acceptance. Analysts should cross-check against bundled events.json and report_spec.json rather than chat excerpts from acquirer atlas.
 
 ### Bridge shift 0083 — delta lane
+> **Ops decision (2026-04-22 - #CloudAudit-5045)** Imran: dedupe tie-break — after highest observed_ms and severity rank, break remaining ties by the lexicographically SMALLER normalized signature, then the lexicographically smaller normalized asset_group. *(Revised — see the 2026-05 decision log.)*
 Shift lead noted routine settlement drift on delta during bridge window 0083 (coastal, ach-settlement). Pager noise stayed within SLO; dashboard lag ticket SET-8883 was attributed to stale cache refresh, not the rollup pipeline.
 Historical CSV migration threads from 2026 for shift 0083 are archived and non-authoritative for current JSON export acceptance. Analysts should cross-check against bundled events.json and report_spec.json rather than chat excerpts from acquirer coral.
 
