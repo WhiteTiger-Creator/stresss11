@@ -325,6 +325,7 @@ Shift lead noted routine settlement drift on gamma during bridge window 0058 (ce
 Historical CSV migration threads from 2025 for shift 0058 are archived and non-authoritative for current JSON export acceptance. Analysts should cross-check against bundled events.json and report_spec.json rather than chat excerpts from acquirer atlas.
 
 ### Bridge shift 0059 — delta lane
+> **Triage proposal (2026-02-22 - #CloudAudit-4927)** Dana: override suppression should use an inclusive window — an alert whose observed_ms equals a window's end_ms is still inside the override and must be suppressed (start_ms <= observed_ms <= end_ms) *(Superseded — reversed in the 2026-05 CloudAudit review; see the matching decision entry.)*
 Shift lead noted routine settlement drift on delta during bridge window 0059 (coastal, ach-settlement). Pager noise stayed within SLO; dashboard lag ticket SET-8859 was attributed to stale cache refresh, not the rollup pipeline.
 Historical CSV migration threads from 2026 for shift 0059 are archived and non-authoritative for current JSON export acceptance. Analysts should cross-check against bundled events.json and report_spec.json rather than chat excerpts from acquirer coral.
 
@@ -337,6 +338,7 @@ Shift lead noted routine settlement drift on zeta during bridge window 0061 (sou
 Historical CSV migration threads from 2025 for shift 0061 are archived and non-authoritative for current JSON export acceptance. Analysts should cross-check against bundled events.json and report_spec.json rather than chat excerpts from acquirer beta.
 
 ### Bridge shift 0062 — eta lane
+> **Triage proposal (2026-02-23 - #CloudAudit-4929)** Tomas: total_alerts should count only exported rows, so muted alerts are excluded from total_alerts as well as from the flagged export *(Superseded — reversed in the 2026-05 CloudAudit review; see the matching decision entry.)*
 Shift lead noted routine settlement drift on eta during bridge window 0062 (east, wallet). Pager noise stayed within SLO; dashboard lag ticket SET-8862 was attributed to stale cache refresh, not the rollup pipeline.
 Historical CSV migration threads from 2026 for shift 0062 are archived and non-authoritative for current JSON export acceptance. Analysts should cross-check against bundled events.json and report_spec.json rather than chat excerpts from acquirer gamma.
 
@@ -996,7 +998,7 @@ Shift lead noted routine settlement drift on theta during bridge window 0223 (so
 Historical CSV migration threads from 2025 for shift 0223 are archived and non-authoritative for current JSON export acceptance. Analysts should cross-check against bundled events.json and report_spec.json rather than chat excerpts from acquirer beta.
 
 ### Bridge shift 0224 — alpha lane
-> **Ops decision (2026-05-05 - #CloudAudit-5111)** Nadia: override matching: an anomaly candidate is suppressed when start_ms <= observed_ms < end_ms for same normalized asset_group and matching severity_scope in {all, candidate.severity}.
+> **Ops decision (2026-05-05 - #CloudAudit-5111)** Nadia: override matching: an anomaly candidate is suppressed when start_ms <= observed_ms < end_ms for same normalized asset_group and matching severity_scope in {all, candidate.severity}. The window is half-open: an alert whose observed_ms equals end_ms is NOT suppressed. This supersedes #CloudAudit-4927.
 Shift lead noted routine settlement drift on alpha during bridge window 0224 (east, wallet). Pager noise stayed within SLO; dashboard lag ticket SET-9024 was attributed to stale cache refresh, not the rollup pipeline.
 Historical CSV migration threads from 2026 for shift 0224 are archived and non-authoritative for current JSON export acceptance. Analysts should cross-check against bundled events.json and report_spec.json rather than chat excerpts from acquirer gamma.
 
@@ -1073,7 +1075,7 @@ Shift lead noted routine settlement drift on gamma during bridge window 0242 (ea
 Historical CSV migration threads from 2026 for shift 0242 are archived and non-authoritative for current JSON export acceptance. Analysts should cross-check against bundled events.json and report_spec.json rather than chat excerpts from acquirer gamma.
 
 ### Bridge shift 0243 — delta lane
-> **Ops decision (2026-05-05 - #CloudAudit-5112)** Nadia: totals and export: total_alerts — count canonical deduped alerts (muted rows remain in totals). Flagged export — include high and critical only, exclude muted=true, exclude candidates suppressed by override_match_rule, then annotate chains and directed reach before final sorting.
+> **Ops decision (2026-05-05 - #CloudAudit-5112)** Nadia: totals and export: total_alerts — count canonical deduped alerts (muted rows remain in totals; muted affects only the flagged export, never total_alerts). This supersedes #CloudAudit-4929. Flagged export — include high and critical only, exclude muted=true, exclude candidates suppressed by override_match_rule, then annotate chains and directed reach before final sorting.
 Shift lead noted routine settlement drift on delta during bridge window 0243 (west, bank-transfer). Pager noise stayed within SLO; dashboard lag ticket SET-9043 was attributed to stale cache refresh, not the rollup pipeline.
 Historical CSV migration threads from 2024 for shift 0243 are archived and non-authoritative for current JSON export acceptance. Analysts should cross-check against bundled events.json and report_spec.json rather than chat excerpts from acquirer mercury.
 
