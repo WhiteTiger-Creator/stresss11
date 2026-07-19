@@ -474,6 +474,53 @@
       "items": "string",
       "order": "sorted lexicographically ascending",
       "note": "alert_id values as strings, sorted -- not in export order."
+    },
+    "_note": "Declares the exact key name, JSON type and container shape of every field the verifier matches literally. These are output-format facts only; how each value is derived is governed by the dossier's ticketed decisions.",
+    "pipeline_status": {
+      "type": "string",
+      "enum": [
+        "diagnosed",
+        "repaired"
+      ],
+      "note": "The key is named exactly `pipeline_status`. `diagnosis`, `status` and `state` are not accepted. A diagnose run reports `diagnosed`; a repair run reports `repaired`."
+    },
+    "input_stats": {
+      "type": "object",
+      "keys": [
+        "alert_count",
+        "unique_alert_ids",
+        "asset_groups"
+      ],
+      "note": "Exactly these three keys, no aliases and no extras."
+    },
+    "asset_groups": {
+      "type": "array",
+      "items": "string",
+      "order": "sorted ascending",
+      "note": "A JSON array of the distinct asset-group names, sorted. It is NOT a count -- returning an integer here fails, even when the integer equals the array length."
+    },
+    "alert_count": {
+      "type": "integer",
+      "note": "Number of alert records read from the input, counted BEFORE deduplication."
+    },
+    "unique_alert_ids": {
+      "type": "integer",
+      "note": "Number of distinct alert_id values in the input. This is the deduplicated count; alert_count is not."
+    },
+    "raw_alert_count": {
+      "type": "integer",
+      "note": "verified_summary field. Raw input record count BEFORE deduplication -- do not substitute the deduplicated count here."
+    },
+    "issues_found_item": {
+      "type": "object",
+      "keys": [
+        "id",
+        "severity",
+        "description",
+        "resolution",
+        "evidence"
+      ],
+      "note": "Every finding carries all five keys; `evidence` is itself an object with exactly `dossier_quote`, `pipeline_evidence` and `repair_action`. Omitting severity, description or resolution fails the schema check."
     }
   }
 }
