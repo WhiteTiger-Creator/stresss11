@@ -69,7 +69,11 @@
       "chain_digest_checksum",
       "max_chain_reach_score",
       "chain_reach_digest_checksum",
-      "anomaly_digest_checksum"
+      "anomaly_digest_checksum",
+      "critical_escalation_ids",
+      "critical_escalation_count",
+      "max_escalation_pressure",
+      "escalation_ledger_checksum"
     ]
   },
   "cli": {
