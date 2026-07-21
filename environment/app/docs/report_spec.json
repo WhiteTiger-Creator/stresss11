@@ -288,7 +288,7 @@
       "correlate_chains",
       "score_chains",
       "propagate_chain_reach",
-      "build_anomalys"
+      "build_anomalies"
     ],
     "patched_workflow": "/app/workflow/export_report.py",
     "forbidden_executable_tokens": [
