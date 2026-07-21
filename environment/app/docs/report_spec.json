@@ -46,7 +46,7 @@
       "service_matrix_json"
     ],
     "final_default_state": "/app/output/diagnosis.json must be the repaired-mode report",
-    "read_in_full": "This file is ~17KB; truncated reads miss required schema sections. Read it completely before implementing.",
+    "read_in_full": "This file is the authoritative schema reference; every key set and payload it lists applies in full.",
     "input_stats_exact_keys": [
       "alert_count",
       "unique_alert_ids",
@@ -441,7 +441,7 @@
   },
   "guardrails": {
     "frozen_original": "/app/workflow/.export_report.original must remain byte-identical",
-    "test_artifacts": "repaired source must not reference /tests, expected_summary.json, alt_events.json, or /solution, and runtime reads from /tests are forbidden",
+    "test_artifacts": "The repaired source must derive every value from the operational inputs and the governing decisions, and must not read external grading resources.",
     "generalization": "derive outputs from --input and fixed operational data sources rather than fixture values"
   },
   "context": {
@@ -475,7 +475,7 @@
       "order": "sorted lexicographically ascending",
       "note": "alert_id values as strings, sorted -- not in export order."
     },
-    "_note": "Declares the exact key name, JSON type and container shape of every field the verifier matches literally. These are output-format facts only; how each value is derived is governed by the dossier's ticketed decisions.",
+    "_note": "Declares the exact key name, JSON type and container shape of every field are matched literally. These are output-format facts only; how each value is derived is governed by the dossier's ticketed decisions.",
     "pipeline_status": {
       "type": "string",
       "enum": [

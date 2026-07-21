@@ -794,15 +794,27 @@ def test_original_snapshot_preserved(expected: dict):
     assert ".lower(" not in original
 
 
-def test_pipeline_does_not_reference_test_or_solution_artifacts():
-    combined = PIPELINE.read_text() + "\n" + CLI.read_text()
-    for token in (
-        "/tests",
-        "expected_summary.json",
-        "alt_events.json",
-        "/solution",
-    ):
-        assert token not in combined
+def test_pipeline_output_tracks_its_input(tmp_path_factory):
+    """The repaired pipeline computes from its --input rather than emitting fixed
+    values, so its output changes when the input changes. A solution that hard-coded
+    results or read verifier fixtures instead of the given stream would fail this."""
+    base_events = _load_events(INPUT_PATH)
+    assert len(base_events) > 1
+
+    base_dir = tmp_path_factory.mktemp("track_base")
+    assert _run_pipeline(output_dir=base_dir).returncode == 0
+    base_summary = json.loads((base_dir / "summary.json").read_text())
+
+    perturbed = base_events[:-1]
+    perturbed_input = tmp_path_factory.mktemp("track_in") / "events.json"
+    perturbed_input.write_text(json.dumps(perturbed), encoding="utf-8")
+    perturbed_dir = tmp_path_factory.mktemp("track_out")
+    assert _run_pipeline(input_path=perturbed_input, output_dir=perturbed_dir).returncode == 0
+    perturbed_summary = json.loads((perturbed_dir / "summary.json").read_text())
+
+    assert perturbed_summary["raw_alert_count"] == len(perturbed)
+    assert perturbed_summary["raw_alert_count"] != base_summary["raw_alert_count"]
+    assert perturbed_summary != base_summary
 
 
 def test_repair_runtime_does_not_read_tests_tree():
