@@ -174,5 +174,101 @@
     "asset_group": "iam",
     "signature": "zeta signature (audit)",
     "muted": false
+  },
+  {
+    "alert_id": "va01",
+    "observed_ms": 1900007010000,
+    "severity": "critical",
+    "asset_group": "vpc",
+    "signature": "lateral movement probe",
+    "muted": false
+  },
+  {
+    "alert_id": "va02",
+    "observed_ms": 1900007010300,
+    "severity": "high",
+    "asset_group": "vpc",
+    "signature": "lateral movement probe repeat",
+    "muted": false
+  },
+  {
+    "alert_id": "va03",
+    "observed_ms": 1900007010550,
+    "severity": "high",
+    "asset_group": "vpc",
+    "signature": "subnet exfil attempt",
+    "muted": false
+  },
+  {
+    "alert_id": "va04",
+    "observed_ms": 1900007012100,
+    "severity": "critical",
+    "asset_group": "vpc",
+    "signature": "privilege escalation vpc",
+    "muted": false
+  },
+  {
+    "alert_id": "va05",
+    "observed_ms": 1900007012400,
+    "severity": "high",
+    "asset_group": "vpc",
+    "signature": "privilege escalation vpc burst",
+    "muted": false
+  },
+  {
+    "alert_id": "ka01",
+    "observed_ms": 1900007013300,
+    "severity": "critical",
+    "asset_group": "kms",
+    "signature": "key export anomaly",
+    "muted": false
+  },
+  {
+    "alert_id": "ka02",
+    "observed_ms": 1900007013600,
+    "severity": "high",
+    "asset_group": "kms",
+    "signature": "key export anomaly burst",
+    "muted": false
+  },
+  {
+    "alert_id": "ea01",
+    "observed_ms": 1900007014200,
+    "severity": "high",
+    "asset_group": "edge",
+    "signature": "key export anomaly edge",
+    "muted": false
+  },
+  {
+    "alert_id": "ea02",
+    "observed_ms": 1900007014500,
+    "severity": "critical",
+    "asset_group": "edge",
+    "signature": "data staging edge",
+    "muted": false
+  },
+  {
+    "alert_id": "ma01",
+    "observed_ms": 1900007015000,
+    "severity": "high",
+    "asset_group": "kms",
+    "signature": "suppressed noise",
+    "muted": true
+  },
+  {
+    "alert_id": "md01",
+    "observed_ms": 1900007015200,
+    "severity": "medium",
+    "asset_group": "edge",
+    "signature": "routine edge poll",
+    "muted": false
+  },
+  {
+    "alert_id": "va04",
+    "observed_ms": 1900007012050,
+    "severity": "medium",
+    "asset_group": "vpc",
+    "signature": "privilege escalation vpc",
+    "muted": false
   }
 ]
